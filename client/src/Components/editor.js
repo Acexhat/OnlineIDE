@@ -58,7 +58,7 @@ const Editor = (props) => {
     const [language, setLanguage] = React.useState("javascript");
 
     const handleCodeCompile = () => {
-        const URL = "http://localhost:8000/compile";
+        const URL = "/compile";
         props.handleLoadingState(true);
         axios.post(URL, {
             code: codeContent,

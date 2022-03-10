@@ -2,14 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const Axios = require("axios");
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
-
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static('client/build'));
-}
 
 app.post("/compile", (req, res) => {
 	//getting the required data from the request
@@ -43,6 +39,10 @@ app.post("/compile", (req, res) => {
 		});
 })
 
-app.listen(process.env.PORT || PORT, () => {
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static('client/build'));
+}
+
+app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`);
 });
